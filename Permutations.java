@@ -1,25 +1,28 @@
 public class Permutations {
 
 	static void permutation(String str) {
-		permutation(str, "", 0);
+		permutation(str, "");
 	}
 
-	static void permutation(String str, String prefix, int count) {
+	static void permutation(String str, String prefix) {
 		if (str.length() == 0) {
-			count++;
 			System.out.println(prefix);
 		} else {
 			for (int i = 0; i < str.length(); i++) {
-				String rem = str.substring(0, i) + str.substring(i + 1);					
-				permutation(rem, prefix + str.charAt(i), count);
+				System.out.println("i = " + i);
+				System.out.println("str = " + str);
+				String rem = str.substring(0, i) + str.substring(i + 1);
+				System.out.println("rem is == " + rem);
+				System.out.println("prefix is == " + prefix + str.charAt(i));					
+				permutation(rem, prefix + str.charAt(i));
+				System.out.println();
 			}
 		}
 	}
 
 	public static void main(String[] args) {
 		String str = "ABC";
-		int count = 0;
-		permutation(str, "-", count);
-		System.out.println("count == " + count);
+		permutation(str, "-");
 	}
 }
+
