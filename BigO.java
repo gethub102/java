@@ -11,6 +11,8 @@ public class BigO {
         System.out.println("div(2, 3): " + div(2, 3));
         System.out.println("sqrt(8): " + sqrt(8));
         System.out.println("DigitSum(8): " + DigitSum(18));
+        System.out.println("pritnSortedStrings(5): ");
+        printSortedStrings(5, "-");
     }
     
     /* o(b) */
@@ -70,5 +72,39 @@ public class BigO {
             n /= 10;
         }
         return sum;
+    }
+    
+    /*
+    the following code will print all the strings of length k where the characters are in sorted order. It does this by generating all the strings of
+    length k and then checking if each is sorted. The run time is = ?
+    */
+    static int numChar = 26;
+    static void printSortedStrings(int remaining) {
+        printSortedStrings(remaining, "");
+    }
+    static void printSortedStrings(int remaining, String prefix) {
+        if (remaining == 0) {
+            if (isInOrder(prefix)) {
+                System.out.println(prefix);
+            }
+        } else {
+            for (int i = 0; i < numChar; i++) {
+                char c = ithLetter(i);
+                printSortedStrings(remaining - 1, prefix + c);
+            }
+        }
+    }
+    static boolean isInOrder(String prefix) {
+        for (int i = 1; i < prefix.length(); i++) {
+            int prev = ithLetter(prefix.charAt(i - 1));
+            int curr = ithLetter(prefix.charAt(i));
+            if (prev > curr) {
+                return false;
+            }
+        }
+        return true;
+    }
+    static char ithLetter(int i) {
+        return (char)(((int)'a') + i);
     }
 }
